@@ -612,6 +612,12 @@ for (y in sort(unique(hardship_percent$year))) {
 # Adjusted logistic regression odds ratios
 # -----------------------------
 
+# -----------------------------
+# 10. Figures 2-5:
+# Adjusted logistic regression odds ratios
+# Separate figure for each year and pooled analysis
+# -----------------------------
+
 or_plot_data <- logistic_adjusted_table %>%
   filter(
     is.finite(odds_ratio),
@@ -632,47 +638,166 @@ or_plot_data <- logistic_adjusted_table %>%
     )
   )
 
-fig2 <- ggplot(
-  or_plot_data,
-  aes(x = odds_ratio, y = hardship)
-) +
-  geom_vline(xintercept = 1, linetype = "dashed") +
-  geom_segment(
-    aes(x = ci_low, xend = ci_high, y = hardship, yend = hardship)
+
+# Function to create one adjusted odds-ratio figure
+make_adjusted_or_figure <- function(
+    data,
+    selected_year,
+    figure_number,
+    figure_title,
+    figure_subtitle
+) {
+  
+  plot_data <- data %>%
+    filter(year == selected_year)
+  
+  ggplot(
+    plot_data,
+    aes(x = odds_ratio, y = hardship)
   ) +
-  geom_point(size = 2) +
-  geom_text(
-    aes(label = round(odds_ratio, 2)),
-    nudge_y = 0.18,
-    size = 3,
-    check_overlap = TRUE
-  ) +
-  scale_x_log10() +
-  facet_wrap(~ year) +
-  labs(
-    title = "Adjusted Odds Ratios for Uncontrolled Cancer Pain",
-    subtitle = "Hardship predictors adjusted for age, sex, income, and year in the pooled model",
-    x = "Odds ratio, log scale",
-    y = "Material hardship",
-    caption = "Figure 2. Odds ratios greater than 1 indicate higher odds of uncontrolled cancer pain."
-  ) +
-  theme_minimal(base_size = 12)
+    geom_vline(
+      xintercept = 1,
+      linetype = "dashed"
+    ) +
+    geom_segment(
+      aes(
+        x = ci_low,
+        xend = ci_high,
+        y = hardship,
+        yend = hardship
+      )
+    ) +
+    geom_point(size = 2.5) +
+    geom_text(
+      aes(
+        label = paste0(
+          round(odds_ratio, 2),
+          " (",
+          round(ci_low, 2),
+          "-",
+          round(ci_high, 2),
+          ")"
+        )
+      ),
+      nudge_y = 0.18,
+      size = 3.2,
+      check_overlap = TRUE
+    ) +
+    scale_x_log10() +
+    labs(
+      title = figure_title,
+      subtitle = figure_subtitle,
+      x = "Odds ratio, log scale",
+      y = "Material hardship",
+      caption = paste0(
+        "Figure ",
+        figure_number,
+        ". Points represent adjusted odds ratios; horizontal lines represent 95% confidence intervals. ",
+        "Odds ratios greater than 1 indicate higher odds of uncontrolled cancer pain."
+      )
+    ) +
+    theme_minimal(base_size = 12)
+}
+
+
+# Figure 1a: 2022
+fig2_2022 <- make_adjusted_or_figure(
+  data = or_plot_data,
+  selected_year = "2022",
+  figure_number = 1a,
+  figure_title = "Adjusted Odds Ratios for Uncontrolled Cancer Pain, 2022",
+  figure_subtitle = "Hardship predictors adjusted for age, sex, and income"
+)
 
 ggsave(
-  file.path(output_dir, "figure2_adjusted_odds_ratios_2022_2024.png"),
-  fig2,
-  width = 12,
-  height = 7,
+  file.path(output_dir, "figure2_adjusted_odds_ratios_2022.png"),
+  fig2_2022,
+  width = 9,
+  height = 5.5,
   dpi = 300
 )
 
 ggsave(
-  file.path(output_dir, "figure2_adjusted_odds_ratios_2022_2024.pdf"),
-  fig2,
-  width = 12,
-  height = 7
+  file.path(output_dir, "figure2_adjusted_odds_ratios_2022.pdf"),
+  fig2_2022,
+  width = 9,
+  height = 5.5
 )
 
+
+# Figure 1b: 2023
+fig3_2023 <- make_adjusted_or_figure(
+  data = or_plot_data,
+  selected_year = "2023",
+  figure_number = 1b,
+  figure_title = "Adjusted Odds Ratios for Uncontrolled Cancer Pain, 2023",
+  figure_subtitle = "Hardship predictors adjusted for age, sex, and income"
+)
+
+ggsave(
+  file.path(output_dir, "figure3_adjusted_odds_ratios_2023.png"),
+  fig3_2023,
+  width = 9,
+  height = 5.5,
+  dpi = 300
+)
+
+ggsave(
+  file.path(output_dir, "figure3_adjusted_odds_ratios_2023.pdf"),
+  fig3_2023,
+  width = 9,
+  height = 5.5
+)
+
+
+# Figure 1c: 2024
+fig4_2024 <- make_adjusted_or_figure(
+  data = or_plot_data,
+  selected_year = "2024",
+  figure_number = 1c,
+  figure_title = "Adjusted Odds Ratios for Uncontrolled Cancer Pain, 2024",
+  figure_subtitle = "Hardship predictors adjusted for age, sex, and income"
+)
+
+ggsave(
+  file.path(output_dir, "figure4_adjusted_odds_ratios_2024.png"),
+  fig4_2024,
+  width = 9,
+  height = 5.5,
+  dpi = 300
+)
+
+ggsave(
+  file.path(output_dir, "figure4_adjusted_odds_ratios_2024.pdf"),
+  fig4_2024,
+  width = 9,
+  height = 5.5
+)
+
+
+# Figure 1d: Pooled 2022-2024 analysis
+fig5_pooled <- make_adjusted_or_figure(
+  data = or_plot_data,
+  selected_year = "Pooled 2022-2024",
+  figure_number = 1d,
+  figure_title = "Adjusted Odds Ratios for Uncontrolled Cancer Pain, 2022-2024",
+  figure_subtitle = "Pooled hardship predictors adjusted for age, sex, income, and year"
+)
+
+ggsave(
+  file.path(output_dir, "figure5_adjusted_odds_ratios_pooled_2022_2024.png"),
+  fig5_pooled,
+  width = 9,
+  height = 5.5,
+  dpi = 300
+)
+
+ggsave(
+  file.path(output_dir, "figure5_adjusted_odds_ratios_pooled_2022_2024.pdf"),
+  fig5_pooled,
+  width = 9,
+  height = 5.5
+)
 
 # -----------------------------
 # 11. Supplemental Figure:
