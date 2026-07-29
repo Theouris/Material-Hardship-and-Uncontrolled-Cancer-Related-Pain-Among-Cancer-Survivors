@@ -1,0 +1,13 @@
+analysis_period,predictor,reference,model_adjustment,unweighted_model_n,residual_design_df,odds_ratio,ci_lower_95,ci_upper_95,odds_ratio_ci,p_value,p_value_display,log_odds,standard_error,test_statistic
+2022,Difficulty paying bills,No hardship,"All three hardships; adjusted for age group, sex, and income group",785,544,1.66,0.718,3.836,1.66 (0.72-3.84),0.235483,0.2355,0.50653,0.42649,1.1877
+2022,Transportation insecurity,No hardship,"All three hardships; adjusted for age group, sex, and income group",785,544,3.233,1.521,6.873,3.23 (1.52-6.87),0.00234543,0.0023,1.17351,0.38387,3.057
+2022,Utility insecurity,No hardship,"All three hardships; adjusted for age group, sex, and income group",785,544,0.993,0.406,2.428,0.99 (0.41-2.43),0.987819,0.9878,-0.00695,0.45508,-0.0153
+2023,Difficulty paying bills,No hardship,"All three hardships; adjusted for age group, sex, and income group",159,103,4.566,0.962,21.674,4.57 (0.96-21.67),0.0558808,0.0559,1.51864,0.78531,1.9338
+2023,Transportation insecurity,No hardship,"All three hardships; adjusted for age group, sex, and income group",159,103,2.164,0.319,14.681,2.16 (0.32-14.68),0.425568,0.4256,0.77219,0.96527,0.8
+2023,Utility insecurity,No hardship,"All three hardships; adjusted for age group, sex, and income group",159,103,1.135,0.205,6.285,1.13 (0.20-6.29),0.88404,0.8840,0.12621,0.8632,0.1462
+2024,Difficulty paying bills,No hardship,"All three hardships; adjusted for age group, sex, and income group",281,198,0.478,0.129,1.771,0.48 (0.13-1.77),0.267433,0.2674,-0.73897,0.66447,-1.1121
+2024,Transportation insecurity,No hardship,"All three hardships; adjusted for age group, sex, and income group",281,198,1.336,0.422,4.223,1.34 (0.42-4.22),0.620476,0.6205,0.2895,0.58373,0.496
+2024,Utility insecurity,No hardship,"All three hardships; adjusted for age group, sex, and income group",281,198,2.071,0.516,8.318,2.07 (0.52-8.32),0.302937,0.3029,0.72815,0.705,1.0328
+Pooled 2022-2024,Difficulty paying bills,No hardship,"All three hardships; adjusted for age group, sex, income group, and survey year",1225,887,1.444,0.717,2.908,1.44 (0.72-2.91),0.303513,0.3035,0.36725,0.35672,1.0295
+Pooled 2022-2024,Transportation insecurity,No hardship,"All three hardships; adjusted for age group, sex, income group, and survey year",1225,887,2.647,1.399,5.009,2.65 (1.40-5.01),0.00280988,0.0028,0.97347,0.3249,2.9962
+Pooled 2022-2024,Utility insecurity,No hardship,"All three hardships; adjusted for age group, sex, income group, and survey year",1225,887,1.127,0.522,2.433,1.13 (0.52-2.43),0.761223,0.7612,0.11925,0.3923,0.304
