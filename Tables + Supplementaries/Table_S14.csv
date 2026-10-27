@@ -1,0 +1,30 @@
+"Model","N","Events","Parameters","Design df","Residual df","Converged"
+"Crude bills",1382,339,2,1000,999,TRUE
+"Crude transport",1382,339,2,1000,999,TRUE
+"Crude utility",1382,339,2,1000,999,TRUE
+"Age sex income",1382,339,9,1000,992,TRUE
+"Joint hardships only",1382,339,4,1000,997,TRUE
+"Demographic",1382,339,10,1000,991,TRUE
+"Socioeconomic",1382,339,17,1000,984,TRUE
+"Access",1382,339,19,1000,982,TRUE
+"Mobility",1382,339,20,1000,981,TRUE
+"Primary",1382,339,25,1000,976,TRUE
+"Separate bills",1382,339,23,1000,978,TRUE
+"Separate transport",1382,339,23,1000,978,TRUE
+"Separate utility",1382,339,23,1000,978,TRUE
+"Cumulative categories",1382,339,25,1000,976,TRUE
+"Cumulative linear",1382,339,23,1000,978,TRUE
+"Without doctor cost barrier",1382,339,24,1000,977,TRUE
+"Without function measures",1382,339,23,1000,978,TRUE
+"Insurance type",1382,339,27,1000,974,TRUE
+"Jurisdiction adjustment",1382,339,40,1000,961,TRUE
+"Omit 2022",678,176,25,510,486,TRUE
+"Omit 2023",1231,294,25,882,858,TRUE
+"Omit 2024",1118,272,25,795,771,TRUE
+"Omit 2025",1119,275,25,813,789,TRUE
+"Missing income retained",1640,400,26,1231,1206,TRUE
+"Cancer subset baseline",937,227,25,654,630,TRUE
+"Cancer covariates added",937,227,31,654,624,TRUE
+"Year sample share",1382,339,25,1000,976,TRUE
+"Jurisdiction repetition",1382,339,25,1000,976,TRUE
+"Year interactions",1382,339,37,1000,964,TRUE

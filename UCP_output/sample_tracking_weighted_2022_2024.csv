@@ -1,5 +1,0 @@
-analysis_period,total_brfss_n,current_cancer_pain_yes_n,valid_pain_control_n,controlled_all_classifiable_n,uncontrolled_all_classifiable_n,valid_pain_control_and_all_three_hardships_n,complete_case_analytic_n,controlled_analytic_n,uncontrolled_analytic_n,weighted_controlled_percent,weighted_uncontrolled_percent,analytic_jurisdictions_n,analytic_jurisdictions,annual_pooling_base_n,pooled_weight_scalar
-2022,445132,1544,1489,1137,352,969,785,602,183,74.5,25.5,10,Connecticut; Delaware; Idaho; Indiana; Missouri; New Jersey; Utah; Vermont; Wisconsin; Puerto Rico,81586,0.633422
-2023,433323,222,211,146,65,203,159,112,47,71.4,28.6,2,Indiana; New Jersey,20321,0.157769
-2024,457670,582,563,419,144,342,281,210,71,73,27,3,Delaware; Indiana; Massachusetts,26895,0.208809
-Pooled 2022-2024,1336125,2348,2263,1702,561,1514,1225,924,301,74.2,25.8,11,Connecticut; Delaware; Idaho; Indiana; Massachusetts; Missouri; New Jersey; Utah; Vermont; Wisconsin; Puerto Rico,128802,

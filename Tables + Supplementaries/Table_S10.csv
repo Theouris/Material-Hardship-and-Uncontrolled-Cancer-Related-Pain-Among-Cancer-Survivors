@@ -1,0 +1,5 @@
+"Test","Wald F","Numerator df","Denominator df","P"
+"Difficulty paying bills","0.350",3,964,".789"
+"Transportation insecurity","1.354",3,964,".256"
+"Utility insecurity","0.527",3,964,".664"
+"All hardships","0.758",9,964,".656"

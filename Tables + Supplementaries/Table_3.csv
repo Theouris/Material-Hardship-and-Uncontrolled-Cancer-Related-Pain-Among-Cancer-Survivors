@@ -1,0 +1,7 @@
+"Hardship","Status","Uncontrolled n / group N","Weighted % (95% CI)","Rao-Scott F (df1, df2)","P"
+"Difficulty paying bills","No","237 / 1142","21.2 (17.7 to 25.2)","20.94 (1, 1000)","<.001"
+"","Yes","102 / 240","42.9 (33.6 to 52.8)","",""
+"Transportation insecurity","No","256 / 1207","21.7 (18.2 to 25.6)","28.80 (1, 1000)","<.001"
+"","Yes","83 / 175","49.2 (38.6 to 60.0)","",""
+"Utility insecurity","No","268 / 1199","22.3 (18.9 to 26.2)","13.27 (1, 1000)","<.001"
+"","Yes","71 / 183","41.6 (31.0 to 53.0)","",""
