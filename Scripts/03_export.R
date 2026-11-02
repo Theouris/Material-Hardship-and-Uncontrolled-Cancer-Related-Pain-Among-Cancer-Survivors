@@ -100,7 +100,27 @@ publish(data.frame(Hardships=z$hardships,`Sample n`=z$count,`Weighted % (95% CI)
 sens <- c("Without doctor cost barrier","Without function measures","Insurance type","Jurisdiction adjustment",
   paste("Omit",2022:2025),"Year sample share","Jurisdiction repetition","Missing income retained",
   "Cancer subset baseline","Cancer covariates added")
-publish(wide_models(sens),"Table_S9","Supplementary Table S9. Sensitivity analyses with sample sizes and events")
+s9 <- wide_models(sens)
+for (j in seq_along(hardships)) {
+  baseline <- c[c$model=="Primary" & c$term==hardships[j],]
+  estimates <- c[c$model %in% sens & c$term==hardships[j],]
+  estimates <- estimates[match(sens,estimates$model),]
+  significance_changed <- (estimates$lower>1 | estimates$upper<1) !=
+    (baseline$lower>1 | baseline$upper<1)
+  direction_changed <- (estimates$OR>1 & baseline$OR<1) |
+    (estimates$OR<1 & baseline$OR>1)
+  changed <- significance_changed | direction_changed
+  s9[changed,j+2] <- paste0(s9[changed,j+2]," +")
+}
+s9_notes <- c(
+  "+ Indicates a change from the primary analysis in statistical significance (95% CI excludes 1) or OR direction (above versus below 1).",
+  "Omitting 2022 reversed the direction of all three material hardship ORs; all remained nonsignificant.",
+  paste0("Difficulty paying bills became significant in both cancer-subset models, including before cancer covariates were added. ",
+    "All other sensitivity analyses preserved statistical significance and OR direction relative to the primary analysis."))
+s9_note_rows <- as.data.frame(matrix("",nrow=length(s9_notes),ncol=ncol(s9)),stringsAsFactors=FALSE)
+names(s9_note_rows) <- names(s9)
+s9_note_rows$Model <- s9_notes
+publish(rbind(s9,s9_note_rows),"Table_S9","Supplementary Table S9. Sensitivity analyses with sample sizes and events")
 z <- read_result("interaction_tests")
 publish(data.frame(Test=ifelse(z$hardship %in% hardships,labels[z$hardship],z$hardship),
   `Wald F`=sprintf("%.3f",z$F),`Numerator df`=z$df1,`Denominator df`=z$df2,P=p_text(z$P),check.names=FALSE),
@@ -157,15 +177,30 @@ forest("Primary","Figure 4. Primary expanded joint adjusted odds ratios","Figure
 flow <- read_result("participant_flow")
 png(file.path(root,"Figures","Figure_1.png"),width=2400,height=3000,res=350)
 draw_flow <- function() {
+  exclusion_reasons <- c(
+    "Common-module jurisdictions"="Jurisdiction did not use\nrequired modules",
+    "Valid survey design"="Missing or invalid survey\nweights or design identifiers",
+    "Cancer history"="No reported cancer history",
+    "Current cancer-related pain"="No reported current\ncancer-related pain",
+    "Valid pain-control response"="Missing or invalid\npain-control response",
+    "Complete hardship responses"="Missing or invalid\nhardship responses",
+    "Complete primary covariates"="Missing or invalid\nprimary covariates")
+  step_labels <- flow$step
+  step_labels[step_labels=="Source records"] <- "Source records for\nall jurisdictions"
   par(mar=c(0,0,2,0)); plot.new(); plot.window(xlim=c(0,1),ylim=c(0,1))
   title(main="Figure 1. Participant flow for pooled BRFSS 2022-2025",cex.main=.95,line=.5)
   yy <- seq(.94,.08,length.out=nrow(flow))
   for(i in seq_len(nrow(flow))) {
-    rect(.06,yy[i]-.035,.72,yy[i]+.035,col="#F2F5F7",border="#7B8D99")
-    text(.39,yy[i],paste0(flow$step[i],"\nn = ",number(flow$retained_n[i])),cex=.9)
+    rect(.03,yy[i]-.035,.60,yy[i]+.035,col="#F2F5F7",border="#7B8D99")
+    text(.315,yy[i],paste0(step_labels[i],"\nn = ",number(flow$retained_n[i])),cex=.83)
     if(i<nrow(flow)) {
-      arrows(.39,yy[i]-.035,.39,yy[i+1]+.038,length=.07)
-      if(flow$excluded_n[i+1]>0) text(.77,mean(yy[c(i,i+1)]),paste0("Excluded\nn = ",number(flow$excluded_n[i+1])),cex=.8,adj=0)
+      arrows(.315,yy[i]-.035,.315,yy[i+1]+.038,length=.07)
+      if(flow$excluded_n[i+1]>0) {
+        exclusion_y <- mean(yy[c(i,i+1)])
+        arrows(.315,exclusion_y,.62,exclusion_y,length=.06)
+        text(.64,exclusion_y,paste0("Excluded: ",exclusion_reasons[flow$step[i+1]],
+          "\nn = ",number(flow$excluded_n[i+1])),cex=.75,adj=0)
+      }
     }
   }
 }
